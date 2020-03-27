@@ -1,25 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { increase, decrease } from '../../store/actions/counter.action';
 import { connect } from 'react-redux';
 
-const HomeContainer = props => {
+const HomeContainer = ({ counter, increase, decrease }) => {
   return (
     <div>
       <h1>
-        Current Number : <strong>{props.counter}</strong>
+        Current Number : <strong>{counter}</strong>
         <div>
-          <button onClick={() => props.increase()}>increase</button>
-          <button onClick={() => props.decrease()}>decrease</button>
+          <button onClick={increase}>increase</button>
+          <button onClick={decrease}>decrease</button>
         </div>
       </h1>
     </div>
   );
 };
 
-const mapToStateProps = state => {
-  return {
-    counter: state.counter,
-  };
+HomeContainer.propTypes = {
+  counter: PropTypes.number.isRequired,
+  increase: PropTypes.func.isRequired,
+  decrease: PropTypes.func.isRequired,
 };
+
+const mapToStateProps = ({ counter }) => ({
+  counter,
+});
 
 export default connect(mapToStateProps, { increase, decrease })(HomeContainer);
