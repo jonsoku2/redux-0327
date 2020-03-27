@@ -2,12 +2,12 @@ import { INCREASE, DECREASE } from '../typs';
 
 const initialState = 0;
 
-export default (state = initialState, action) => {
-  switch (action.type) {
+export default (state = initialState, { type, payload }) => {
+  switch (type) {
     case INCREASE:
-      return state + action.payload;
+      return state + payload;
     case DECREASE:
-      return state + action.payload;
+      return state + payload;
     default:
       return state;
   }
